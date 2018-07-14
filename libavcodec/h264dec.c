@@ -634,6 +634,8 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
     if (nals_needed < 0)
         return nals_needed;
 
+    printf("nals needed %d\n", nals_needed);
+
     for (i = 0; i < h->pkt.nb_nals; i++) {
         H2645NAL *nal = &h->pkt.nals[i];
         int max_slice_ctx, err;
