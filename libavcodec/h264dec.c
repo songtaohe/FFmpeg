@@ -965,6 +965,7 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
     int buf_index;
     int ret;
 
+    //printf("h264 decode frame\n");
     h->flags = avctx->flags;
     h->setup_finished = 0;
     h->nb_slice_ctx_queued = 0;
@@ -991,6 +992,11 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
     }
 
     buf_index = decode_nal_units(h, buf, buf_size);
+    printf("number of nal %d  %x%x%x%x%x%x%x%x    \n", buf_index, buf[0],buf[1],buf[2],buf[3],buf[4],buf[5],buf[6],buf[7]);
+
+
+
+
     if (buf_index < 0)
         return AVERROR_INVALIDDATA;
 

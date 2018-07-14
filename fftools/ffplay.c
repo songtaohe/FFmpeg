@@ -2900,6 +2900,8 @@ static int read_thread(void *arg)
         infinite_buffer = 1;
 
     for (;;) {
+	//printf("Mark \n");
+	//av_log(NULL, AV_LOG_ERROR, "makr\n");
         if (is->abort_request)
             break;
         if (is->paused != is->last_paused) {
@@ -2927,6 +2929,7 @@ static int read_thread(void *arg)
 //      of the seek_pos/seek_rel variables
 
             ret = avformat_seek_file(is->ic, -1, seek_min, seek_target, seek_max, is->seek_flags);
+	    printf("mark1 %d\n",ret);
             if (ret < 0) {
                 av_log(NULL, AV_LOG_ERROR,
                        "%s: error while seeking\n", is->ic->url);
@@ -3021,6 +3024,7 @@ static int read_thread(void *arg)
         } else if (pkt->stream_index == is->video_stream && pkt_in_play_range
                    && !(is->video_st->disposition & AV_DISPOSITION_ATTACHED_PIC)) {
             packet_queue_put(&is->videoq, pkt);
+	//	printf("Mark\n");
         } else if (pkt->stream_index == is->subtitle_stream && pkt_in_play_range) {
             packet_queue_put(&is->subtitleq, pkt);
         } else {

@@ -1573,6 +1573,9 @@ static int read_frame_internal(AVFormatContext *s, AVPacket *pkt)
 
     av_init_packet(pkt);
 
+
+    printf("here?\n");
+
     while (!got_packet && !s->internal->parse_queue) {
         AVStream *st;
         AVPacket cur_pkt;
@@ -1770,6 +1773,7 @@ int av_read_frame(AVFormatContext *s, AVPacket *pkt)
     int eof = 0;
     int ret;
     AVStream *st;
+    int packet_n = 0;
 
     if (!genpts) {
         ret = s->internal->packet_buffer
@@ -1782,6 +1786,7 @@ int av_read_frame(AVFormatContext *s, AVPacket *pkt)
     }
 
     for (;;) {
+	packet_n += 1 ;
         AVPacketList *pktl = s->internal->packet_buffer;
 
         if (pktl) {
@@ -1846,6 +1851,8 @@ int av_read_frame(AVFormatContext *s, AVPacket *pkt)
     }
 
 return_packet:
+
+    //printf("pkts per frame %d  \n",packet_n);
 
     st = s->streams[pkt->stream_index];
     if ((s->iformat->flags & AVFMT_GENERIC_INDEX) && pkt->flags & AV_PKT_FLAG_KEY) {
