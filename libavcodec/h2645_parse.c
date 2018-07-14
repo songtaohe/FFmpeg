@@ -359,10 +359,15 @@ int ff_h2645_packet_split(H2645Packet *pkt, const uint8_t *buf, int length,
 
     pkt->rbsp.rbsp_buffer_size = 0;
     pkt->nb_nals = 0;
+    int nals_c = 0;
+
     while (bytestream2_get_bytes_left(&bc) >= 4) {
+
         H2645NAL *nal;
         int extract_length = 0;
         int skip_trailing_zeros = 1;
+
+        nals_c+=1;
 
         if (bytestream2_tell(&bc) == next_avc) {
             int i = 0;
@@ -462,6 +467,8 @@ int ff_h2645_packet_split(H2645Packet *pkt, const uint8_t *buf, int length,
             pkt->nb_nals--;
         }
     }
+
+    printf("Nals %d\n", nals);
 
     return 0;
 }
