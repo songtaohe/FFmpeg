@@ -468,7 +468,7 @@ int ff_h2645_packet_split(H2645Packet *pkt, const uint8_t *buf, int length,
         }
     }
 
-    printf("Nals %d\n", nals_c);
+    //printf("Nals %d\n", nals_c);
 
     return 0;
 }
