@@ -22,15 +22,18 @@ def process_single_video(filename, output_folder):
 
 	# slice the input video, also resize the video 
 	cmd1 = "ffmpeg -re -i %s -vcodec h264 -slices 8 -b:v 2000k -vf scale=640:360 -bf 0 -y %s" % (filename, video_preprocessed)
-	Popen(cmd1).wait()
+	Popen(cmd1, shell=True).wait()
 
 	# generate reference frames
 	cmd2 = "ffmpeg -re -i %s -r 30 \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_ref_%03d.bmp")
-	Popen(cmd2).wait()
+	Popen(cmd2, shell=True).wait()
 
 
 	# generate simulated frames
 	cmd3 = "../ffmpeg -re -i %s -r 30 \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_sim_%03d.bmp")
+	Popen(cmd3, shell=True).wait()
+
+
 
 
 
@@ -45,5 +48,5 @@ if __name__== "__main__":
 		print("#########  Time for one video %.2f ##############\n" % time()-ts0)
 
 
-		
+
 
