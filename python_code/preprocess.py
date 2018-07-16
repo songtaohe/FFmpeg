@@ -64,16 +64,22 @@ def process_single_video(filename, output_folder):
 
 			#img_mask[np.where(img_ref != img_sim)] = 1
 
-			img_result = np.zeros((np.shape(img_mask)[0],np.shape(img_mask)[1]), dtype=np.uint8)
+			img_result = np.zeros((np.shape(img_mask)[0],np.shape(img_mask)[1]), dtype=np.int)
 
 			img_result[:,:] = img_mask[:,:,0] + img_mask[:,:,1] + img_mask[:,:,2]
 
-			img_result[np.where(img_result>30)] = 255 
+			img_result[np.where(img_result<10)] = 0
 
 			img_result = 255 - img_result
 
+			img_result = np.clip(img_result, 0, 255)
 
-			Image.fromarray(img_result).save(output_sub_folder+"/frame_mask_%05d.png" % i) 
+			#img_result[np.where(img_result>30)] = 255 
+
+			#img_result = 255 - img_result
+
+
+			Image.fromarray(img_result.astype(np.uint8)).save(output_sub_folder+"/frame_mask_%05d.png" % i) 
 
 		else:
 			if i > 0:
