@@ -2533,7 +2533,7 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
     slice_n  += 1;
 
 
-    if (slice_n % 10 == 0) {
+    if (slice_n % 100 == 0 || slice_n % 237 < 13) {
         printf("ignore a slice\n");
         return 0;
     }
