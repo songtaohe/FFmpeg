@@ -2561,6 +2561,8 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
         /* realign */
         align_get_bits(&sl->gb);
 
+
+        //printf("get bits count \n", )
         /* init cabac */
         ret = ff_init_cabac_decoder(&sl->cabac,
                               sl->gb.buffer + get_bits_count(&sl->gb) / 8,
@@ -2582,11 +2584,11 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
             }
 
 
-            printf("bytestream offset  %d %d %d \n", sl->mb_x, sl->mb_y, sl->cabac.bytestream - sl->cabac.bytestream_start);
+            //printf("bytestream offset  %d %d %d \n", sl->mb_x, sl->mb_y, sl->cabac.bytestream - sl->cabac.bytestream_start);
             
-            if (sl->mb_y > 30) {
-                goto finish;
-            }
+            // if (sl->mb_y > 30) {
+            //     goto finish;
+            // }
 
 
             ret = ff_h264_decode_mb_cabac(h, sl);
