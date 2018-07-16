@@ -68,7 +68,7 @@ def process_single_video(filename, output_folder):
 
 			img_result[:,:] = img_mask[:,:,0] + img_mask[:,:,1] + img_mask[:,:,2]
 
-			img_result[np.where(img_result>10)] = 255 
+			img_result[np.where(img_result>30)] = 255 
 
 			img_result = 255 - img_result
 
