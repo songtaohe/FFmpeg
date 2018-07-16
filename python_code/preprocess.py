@@ -8,6 +8,13 @@ import os
 from subprocess import Popen
 from time import time 
 
+from PIL import Image 
+import scipy.ndimage as nd 
+import scipy.misc
+
+import numpy as np 
+import os.path
+
 
 
 def process_single_video(filename, output_folder):
@@ -30,12 +37,12 @@ def process_single_video(filename, output_folder):
 	Popen(cmd1, shell=True).wait()
 
 	# generate reference frames
-	cmd2 = "ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_ref_%03d.bmp")
+	cmd2 = "ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_ref_%05d.bmp")
 	Popen(cmd2, shell=True).wait()
 
 
 	# generate simulated frames
-	cmd3 = "../ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_sim_%03d.bmp")
+	cmd3 = "../ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_sim_%05d.bmp")
 	Popen(cmd3, shell=True).wait()
 
 
@@ -43,7 +50,29 @@ def process_single_video(filename, output_folder):
 	# cmd4 = "../ffmpeg  -i %s -vcodec h264 -y %s" % video_simulated
 	# Popen(cmd4, shell=True).wait()
 
+	for i in xrange(100000):
+		if os.path.isfile(output_sub_folder+"/frame_ref_%05d.bmp" % i) :
+			img_ref = scipy.misc.imread(output_sub_folder+"/frame_ref_%05d.bmp" % i)
+			img_sim = scipy.misc.imread(output_sub_folder+"/frame_sim_%05d.bmp" % i)
 
+			img_mask = np.zeros_like(img_ref)
+
+			img_mask[np.where(img_ref != img_sim)] = 1
+
+			img_result = np.zeros((np.shape(img_mask)[0],np.shape(img_mask)[1]), dtype=np.uint8)
+
+			img_result[:,:] = img_mask[:,:,0] + img_mask[:,:,1] + img_mask[:,:,2]
+
+			img_result[np.where(img_result>0)] = 255 
+
+			img_result = 255 - img_result
+
+
+			Image.fromarray(img_result).save(output_sub_folder+"/frame_mask_%05d.png" % i) 
+
+		else:
+			if i > 0:
+				break
 
 
 
