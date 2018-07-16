@@ -47,6 +47,7 @@
 #include "mpegvideo.h"
 #include "rectangle.h"
 #include "thread.h"
+#include <stdlib.h>
 
 static const uint8_t field_scan[16+1] = {
     0 + 0 * 4, 0 + 1 * 4, 1 + 0 * 4, 0 + 2 * 4,
@@ -2539,7 +2540,7 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
     // }
 
     // config 2
-    if ((slice_n % 111 < 3) && (slice_n > 8*60)) {
+    if ((rand() % 100 < 10) && (slice_n > 8*60)) {
         printf("ignore a slice\n");
         return 0;
     }

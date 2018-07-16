@@ -58,14 +58,17 @@ def process_single_video(filename, output_folder):
 			img_sim = scipy.misc.imread(output_sub_folder+"/frame_sim_%05d.bmp" % i)
 
 			img_mask = np.zeros_like(img_ref)
+			#img_mask = img_mask.astype(np.int)
 
-			img_mask[np.where(img_ref != img_sim)] = 1
+			img_mask = np.abs(img_ref.astype(np.int) - img_sim.astype(np.int))
+
+			#img_mask[np.where(img_ref != img_sim)] = 1
 
 			img_result = np.zeros((np.shape(img_mask)[0],np.shape(img_mask)[1]), dtype=np.uint8)
 
 			img_result[:,:] = img_mask[:,:,0] + img_mask[:,:,1] + img_mask[:,:,2]
 
-			img_result[np.where(img_result>0)] = 255 
+			img_result[np.where(img_result>10)] = 255 
 
 			img_result = 255 - img_result
 
