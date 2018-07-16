@@ -1920,11 +1920,23 @@ int ff_h264_decode_mb_cabac(const H264Context *h, H264SliceContext *sl)
     const int decode_chroma = sps->chroma_format_idc == 1 || sps->chroma_format_idc == 2;
     const int pixel_shift = h->pixel_shift;
 
+    static int ggcc = 0; 
+
+
     mb_xy = sl->mb_xy = sl->mb_x + sl->mb_y*h->mb_stride;
 
     ff_tlog(h->avctx, "pic:%d mb:%d/%d\n", h->poc.frame_num, sl->mb_x, sl->mb_y);
     if (sl->slice_type_nos != AV_PICTURE_TYPE_I) {
         int skip;
+
+        ggcc += 1;
+
+        if (ggcc % 10 == 0){
+            //decode_mb_skip(h, sl);
+            printf("skip\n");
+            return 0;
+        }
+
         /* a skipped mb needs the aff flag from the following mb */
         if (FRAME_MBAFF(h) && (sl->mb_y & 1) == 1 && sl->prev_mb_skipped)
             skip = sl->next_mb_skipped;

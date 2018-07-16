@@ -2557,7 +2557,7 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
     }
 
     if (h->ps.pps->cabac) {
-        printf("Marker CABAC enabled!\n");
+        printf("Marker CABAC enabled! %d  \n", get_bits_count(&sl->gb));
         /* realign */
         align_get_bits(&sl->gb);
 
