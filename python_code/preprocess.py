@@ -51,6 +51,8 @@ def process_single_video(filename, output_folder):
 	# Popen(cmd4, shell=True).wait()
 
 	for i in xrange(100000):
+		if i % 100 == 0:
+			print(i)
 		if os.path.isfile(output_sub_folder+"/frame_ref_%05d.bmp" % i) :
 			img_ref = scipy.misc.imread(output_sub_folder+"/frame_ref_%05d.bmp" % i)
 			img_sim = scipy.misc.imread(output_sub_folder+"/frame_sim_%05d.bmp" % i)
