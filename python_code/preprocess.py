@@ -11,7 +11,7 @@ from time import time
 
 
 def process_single_video(filename, output_folder):
-	strip_filename = filename.split('/')[-1].split('.')[0]
+	strip_filename = filename.split('/')[-1].replace('.','_')
 	output_sub_folder = output_folder+"/"+strip_filename
 
 
@@ -25,16 +25,16 @@ def process_single_video(filename, output_folder):
 
 
 	# slice the input video, also resize the video 
-	cmd1 = "ffmpeg -re -i %s -vcodec h264 -slices 8 -b:v 2000k -vf scale=640:360 -bf 0 -y %s" % (filename, video_preprocessed)
+	cmd1 = "ffmpeg  -i %s -vcodec h264 -slices 8 -b:v 2000k -vf scale=640:360 -bf 0 -y %s" % (filename, video_preprocessed)
 	Popen(cmd1, shell=True).wait()
 
 	# generate reference frames
-	cmd2 = "ffmpeg -re -i %s -r 30 \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_ref_%03d.bmp")
+	cmd2 = "ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_ref_%03d.bmp")
 	Popen(cmd2, shell=True).wait()
 
 
 	# generate simulated frames
-	cmd3 = "../ffmpeg -re -i %s -r 30 \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_sim_%03d.bmp")
+	cmd3 = "../ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_sim_%03d.bmp")
 	Popen(cmd3, shell=True).wait()
 
 
@@ -49,7 +49,7 @@ if __name__== "__main__":
 	for filename in input_file_list:
 		ts0 = time()
 		process_single_video(filename, output_folder)
-		print("#########  Time for one video %.2f ##############\n" % time()-ts0)
+		print("#########  Time for one video %.2f ##############\n" % (time()-ts0))
 
 
 
