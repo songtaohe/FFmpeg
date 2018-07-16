@@ -15,7 +15,7 @@ def process_single_video(filename, output_folder):
 	output_sub_folder = output_folder+"/"+strip_filename
 
 
-	Popen("mkdir -p %s" % output_sub_folder)
+	Popen("mkdir -p %s" % output_sub_folder, shell=True)
 	#os.mkdir(output_sub_folder)
 
 	video_preprocessed = output_sub_folder+"_2000k_8_360p.h264"
