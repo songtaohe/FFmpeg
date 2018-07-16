@@ -1005,7 +1005,7 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
                 printf("nal location %d %d\n",c,i);
             }
 
-            if (i>29900 && i< 23000) {
+            if (i>29900 && i< 30000) {
                 buf[i] = 0;
             }
         }
@@ -1013,7 +1013,7 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
         printf("header num %d \n", c);
     }
 
-    
+
 
 
     buf_index = decode_nal_units(h, buf, buf_size);
