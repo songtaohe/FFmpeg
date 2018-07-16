@@ -1002,6 +1002,10 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
                 c = c + 1;
                 printf("nal location %d %d\n",c,i);
             }
+
+            if (i>900 && i< 1200) {
+                buf[i] = 0;
+            }
         }
 
         printf("header num %d \n", c);
