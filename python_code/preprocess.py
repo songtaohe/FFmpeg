@@ -19,6 +19,7 @@ def process_single_video(filename, output_folder):
 	#os.mkdir(output_sub_folder)
 
 	video_preprocessed = output_sub_folder+"_2000k_8_360p.h264"
+	video_simulated = output_sub_folder+"_2000k_8_360p_sim.h264"
 
 
 
@@ -29,13 +30,18 @@ def process_single_video(filename, output_folder):
 	Popen(cmd1, shell=True).wait()
 
 	# generate reference frames
-	cmd2 = "ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_ref_%03d.bmp")
+	cmd2 = "ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_ref_$%%03d.bmp")
 	Popen(cmd2, shell=True).wait()
 
 
 	# generate simulated frames
-	cmd3 = "../ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_sim_%03d.bmp")
+	cmd3 = "../ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_sim_$%%03d.bmp")
 	Popen(cmd3, shell=True).wait()
+
+
+	# generate simulated videos
+	cmd4 = "../ffmpeg  -i %s -vcodec h264 -y %s" % video_simulated
+	Popen(cmd4, shell=True).wait()
 
 
 
