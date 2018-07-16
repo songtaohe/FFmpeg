@@ -2532,11 +2532,13 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
 
     slice_n  += 1;
 
-
-    if ((slice_n % 100 < 2 || slice_n % 4237 < 240) && (slice_n > 8*60)) {
+    // config 1 
+    if ((slice_n % 111 < 2 || slice_n % 4237 < 240) && (slice_n > 8*60)) {
         printf("ignore a slice\n");
         return 0;
     }
+
+    
 
 
     sl->linesize   = h->cur_pic_ptr->f->linesize[0];
