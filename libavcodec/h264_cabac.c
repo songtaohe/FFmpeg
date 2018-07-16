@@ -1940,7 +1940,7 @@ int ff_h264_decode_mb_cabac(const H264Context *h, H264SliceContext *sl)
             skip = decode_cabac_mb_skip(h, sl, sl->mb_x, sl->mb_y );
 
 
-        if (ggcc % 100 == 0){
+        if (ggcc % 1000 == 0){
             skip = 1;
 
             printf("skip\n");
