@@ -2523,11 +2523,14 @@ static void er_add_slice(H264SliceContext *sl,
 
 static int decode_slice(struct AVCodecContext *avctx, void *arg)
 {
+    static int slice_n = 0;
     H264SliceContext *sl = arg;
     const H264Context *h = sl->h264;
     int lf_x_start = sl->mb_x;
     int orig_deblock = sl->deblocking_filter;
     int ret;
+
+    slice_n  += 1;
 
     sl->linesize   = h->cur_pic_ptr->f->linesize[0];
     sl->uvlinesize = h->cur_pic_ptr->f->linesize[1];
@@ -2584,7 +2587,7 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
             }
 
 
-            //printf("bytestream offset  %d %d %d \n", sl->mb_x, sl->mb_y, sl->cabac.bytestream - sl->cabac.bytestream_start);
+            printf("bytestream offset slice %d, x %d, y %d, byte %d,  bit_buf %d, bit_left %d, size_in_bits %d \n", slice_n ,sl->mb_x, sl->mb_y, sl->cabac.bytestream - sl->cabac.bytestream_start, sl->cabac.pb.bit_buf, sl->cabac.pb.bit_left, sl->cabac.pb.size_in_bits );
             
             // if (sl->mb_y > 30) {
             //     goto finish;
