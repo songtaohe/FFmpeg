@@ -993,6 +993,21 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
                                             avctx->err_recognition, avctx);
     }
 
+
+    if (buf_size > 100) {
+        int i;
+        int c = 1;
+        for (i=0;i<buf_size-4;i++) {
+            if (buf[i]==0 && buf[i+1] == 0 && buf[i+2]==0 && buf[i+3] == 1){
+                c = c + 1;
+            }
+        }
+
+        printf("header num %d \n", c);
+    }
+
+
+
     buf_index = decode_nal_units(h, buf, buf_size);
     printf("number of nal %d  %x%x%x%x%x%x%x%x    \n", buf_index, buf[0],buf[1],buf[2],buf[3],buf[4],buf[5],buf[6],buf[7]);
 
