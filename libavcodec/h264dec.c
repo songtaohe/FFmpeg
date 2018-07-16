@@ -1000,6 +1000,7 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
         for (i=0;i<buf_size-4;i++) {
             if (buf[i]==0 && buf[i+1] == 0 && buf[i+2]==0 && buf[i+3] == 1){
                 c = c + 1;
+                printf("nal location %d %d\n",c,i);
             }
         }
 
