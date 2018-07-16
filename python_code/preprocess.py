@@ -14,9 +14,13 @@ def process_single_video(filename, output_folder):
 	strip_filename = filename.split('/')[-1].split('.')[0]
 	output_sub_folder = output_folder+"/"+strip_filename
 
-	os.mkdir(output_sub_folder)
+
+	Popen("mkdir -p %s" % output_sub_folder)
+	#os.mkdir(output_sub_folder)
 
 	video_preprocessed = output_sub_folder+"_2000k_8_360p.h264"
+
+
 
 
 
