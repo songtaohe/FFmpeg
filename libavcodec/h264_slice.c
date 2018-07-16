@@ -2581,6 +2581,8 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
                 return AVERROR_INVALIDDATA;
             }
 
+
+            printf("bytestream offset  %d \n", sl->cabac.bytestream - sl->cabac.bytestream_start);
             ret = ff_h264_decode_mb_cabac(h, sl);
             // STOP_TIMER("decode_mb_cabac")
 
