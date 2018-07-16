@@ -2585,7 +2585,7 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
             printf("bytestream offset  %d %d %d \n", sl->mb_x, sl->mb_y, sl->cabac.bytestream - sl->cabac.bytestream_start);
             
             if (sl->mb_y > 30) {
-                continue;
+                goto finish;
             }
 
 
