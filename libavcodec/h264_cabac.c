@@ -1931,17 +1931,25 @@ int ff_h264_decode_mb_cabac(const H264Context *h, H264SliceContext *sl)
 
         ggcc += 1;
 
-        // if (ggcc % 10 == 0){
-        //     //decode_mb_skip(h, sl);
-        //     printf("skip\n");
-        //     return 0;
-        // }
+
 
         /* a skipped mb needs the aff flag from the following mb */
         if (FRAME_MBAFF(h) && (sl->mb_y & 1) == 1 && sl->prev_mb_skipped)
             skip = sl->next_mb_skipped;
         else
             skip = decode_cabac_mb_skip(h, sl, sl->mb_x, sl->mb_y );
+
+
+        if (ggcc % 100 == 0){
+            skip = 1;
+
+            printf("skip\n");
+            //return 0;
+
+            
+        }
+
+
         /* read skip flags */
         if( skip ) {
             if (FRAME_MBAFF(h) && (sl->mb_y & 1) == 0) {
