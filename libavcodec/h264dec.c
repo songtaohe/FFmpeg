@@ -996,12 +996,6 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
 
 
    
-
-
-
-    buf_index = decode_nal_units(h, buf, buf_size);
-    printf("number of nal %d  %x%x%x%x%x%x%x%x    \n", buf_index, buf[0],buf[1],buf[2],buf[3],buf[4],buf[5],buf[6],buf[7]);
-
      if (buf_size > 100) {
         int i;
         int c = 1;
@@ -1018,6 +1012,14 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
 
         printf("header num %d \n", c);
     }
+
+    
+
+
+    buf_index = decode_nal_units(h, buf, buf_size);
+    printf("number of nal %d  %x%x%x%x%x%x%x%x    \n", buf_index, buf[0],buf[1],buf[2],buf[3],buf[4],buf[5],buf[6],buf[7]);
+
+
 
 
     if (buf_index < 0)
