@@ -2532,6 +2532,12 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
 
     slice_n  += 1;
 
+
+    if (slice_n % 100 == 0) {
+        return 0;
+    }
+
+
     sl->linesize   = h->cur_pic_ptr->f->linesize[0];
     sl->uvlinesize = h->cur_pic_ptr->f->linesize[1];
 
