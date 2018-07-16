@@ -30,12 +30,12 @@ def process_single_video(filename, output_folder):
 	Popen(cmd1, shell=True).wait()
 
 	# generate reference frames
-	cmd2 = "ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_ref_%%03d.bmp")
+	cmd2 = "ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_ref_%%03d.bmp")
 	Popen(cmd2, shell=True).wait()
 
 
 	# generate simulated frames
-	cmd3 = "../ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_sim_%%03d.bmp")
+	cmd3 = "../ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/$frame_sim_%%03d.bmp")
 	Popen(cmd3, shell=True).wait()
 
 
