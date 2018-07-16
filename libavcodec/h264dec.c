@@ -1004,7 +1004,7 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
                 printf("nal location %d %d\n",c,i);
             }
 
-            if (i>900 && i< 1200) {
+            if (i>9900 && i< 10200) {
                 buf[i] = 0;
             }
         }
