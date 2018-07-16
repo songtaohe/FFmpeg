@@ -2587,7 +2587,8 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
             }
 
 
-            printf("bytestream offset slice %d, x %d, y %d, byte %d,  bit_buf %d, bit_left %d, size_in_bits %d \n", slice_n ,sl->mb_x, sl->mb_y, sl->cabac.bytestream - sl->cabac.bytestream_start, sl->cabac.pb.bit_buf, sl->cabac.pb.bit_left, sl->cabac.pb.size_in_bits );
+            //printf("bytestream offset slice %d, x %d, y %d, byte %d,  bit_buf %d, bit_left %d, size_in_bits %d \n", slice_n ,sl->mb_x, sl->mb_y, sl->cabac.bytestream - sl->cabac.bytestream_start, sl->cabac.pb.bit_buf, sl->cabac.pb.bit_left, sl->cabac.pb.size_in_bits );
+            printf("bytestream offset slice %d, x %d, y %d, byte %d,  %d %d %d\n", slice_n ,sl->mb_x, sl->mb_y, sl->cabac.bytestream - sl->cabac.bytestream_start, sl->cabac.low, sl->cabac.range, sl->cabac.outstanding_count);
             
             // if (sl->mb_y > 30) {
             //     goto finish;
