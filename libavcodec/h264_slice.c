@@ -2540,10 +2540,10 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
     // }
 
     //config 2   10% drop
-    if ((rand() % 100 < 10) && (slice_n > 8*60)) {
-        printf("ignore a slice\n");
-        return 0;
-    }
+    // if ((rand() % 100 < 10) && (slice_n > 8*60)) {
+    //     printf("ignore a slice\n");
+    //     return 0;
+    // }
 
 
     // // config 3  30% drop
@@ -2553,10 +2553,10 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
     // }
 
     // config 4  10% drop + 1 second outage 
-    // if ((rand() % 100 < 10 || slice_n % 4237 < 240) && (slice_n > 8*60)) {
-    //     printf("ignore a slice\n");
-    //     return 0;
-    // }
+    if ((rand() % 100 < 10 || slice_n % 4237 < 240) && (slice_n > 8*60)) {
+        printf("ignore a slice\n");
+        return 0;
+    }
 
 
 
