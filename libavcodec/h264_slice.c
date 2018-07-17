@@ -2553,7 +2553,14 @@ static int decode_slice(struct AVCodecContext *avctx, void *arg)
     // }
 
     // config 4  10% drop + 1 second outage 
-    if ((rand() % 100 < 10 || slice_n % 4237 < 240) && (slice_n > 8*60)) {
+    // if ((rand() % 100 < 10 || slice_n % 4237 < 240) && (slice_n > 8*60)) {
+    //     printf("ignore a slice\n");
+    //     return 0;
+    // }
+
+
+    // config 5  50% brust drop 3 seconds
+    if ((rand() % 100 < 50 && slice_n % 4237 < 720) && (slice_n > 8*60)) {
         printf("ignore a slice\n");
         return 0;
     }
