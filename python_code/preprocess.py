@@ -37,12 +37,12 @@ def process_single_video(filename, output_folder):
 	Popen(cmd1, shell=True).wait()
 
 	# generate reference frames
-	cmd2 = "ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_ref_%05d.bmp")
+	cmd2 = "ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_ref_%05d.png")
 	Popen(cmd2, shell=True).wait()
 
 
 	# generate simulated frames
-	cmd3 = "../ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_sim_%05d.bmp")
+	cmd3 = "../ffmpeg  -i %s -r 30 -y \"%s\"" % (video_preprocessed, output_sub_folder+"/frame_sim_%05d.png")
 	Popen(cmd3, shell=True).wait()
 
 
@@ -53,9 +53,9 @@ def process_single_video(filename, output_folder):
 	for i in xrange(100000):
 		if i % 100 == 0:
 			print(i)
-		if os.path.isfile(output_sub_folder+"/frame_ref_%05d.bmp" % i) :
-			img_ref = scipy.misc.imread(output_sub_folder+"/frame_ref_%05d.bmp" % i)
-			img_sim = scipy.misc.imread(output_sub_folder+"/frame_sim_%05d.bmp" % i)
+		if os.path.isfile(output_sub_folder+"/frame_ref_%05d.png" % i) :
+			img_ref = scipy.misc.imread(output_sub_folder+"/frame_ref_%05d.png" % i)
+			img_sim = scipy.misc.imread(output_sub_folder+"/frame_sim_%05d.png" % i)
 
 			img_mask = np.zeros_like(img_ref)
 			#img_mask = img_mask.astype(np.int)
@@ -89,6 +89,8 @@ def process_single_video(filename, output_folder):
 
 if __name__== "__main__":
 	output_folder = sys.argv[1]
+	# worker_id = int(sys.argv[2])
+	# worker_num = int(sys.argv[3])
 	input_file_list = sys.argv[2:]	
 
 
