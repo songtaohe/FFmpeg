@@ -128,7 +128,7 @@ void ff_h264_draw_horiz_band(const H264Context *h, H264SliceContext *sl,
             offset[i] = 0;
 
         emms_c();
-
+        printf("marker draw horiz band\n");
         avctx->draw_horiz_band(avctx, src, offset,
                                y, h->picture_structure, height);
     }
