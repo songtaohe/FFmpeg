@@ -600,6 +600,21 @@ static void debug_green_metadata(const H264SEIGreenMetaData *gm, void *logctx)
     }
 }
 
+static int hst_dump_bytes(uint8_t * ptr, int length) {
+    char s[512];
+    char * sp = s;
+
+    for (int i=0; i<length; i++){
+        sp = sp + sprintf(sp, "%x", ptr[i]);
+
+    }
+    sp = sp + sprintf(sp, "\n\0");
+
+    printf("%s",sp);
+
+}
+
+
 static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
 {
     AVCodecContext *const avctx = h->avctx;
@@ -638,6 +653,12 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
         return nals_needed;
 
     printf("nals needed %d\n", h->pkt.nb_nals);
+
+
+    hst_dump_bytes(h->cur_pic.f->data, 128);
+    
+
+
 
     for (i = 0; i < h->pkt.nb_nals; i++) {
         H2645NAL *nal = &h->pkt.nals[i];
