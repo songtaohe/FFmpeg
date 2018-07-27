@@ -668,6 +668,9 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
         H2645NAL *nal = &h->pkt.nals[i];
         int max_slice_ctx, err;
 
+        printf("address %d %d %d  %d %p\n", i, idr_cleared, h->has_slice,nal->type, h->cur_pic.f->data[0]);
+        
+        
         if (avctx->skip_frame >= AVDISCARD_NONREF &&
             nal->ref_idc == 0 && nal->type != H264_NAL_SEI)
             continue;
@@ -793,7 +796,7 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
 
 
     printf("address %p\n", h->cur_pic.f->data[0]);
-    
+
 
     ret = ff_h264_execute_decode_slices(h);
     if (ret < 0 && (h->avctx->err_recognition & AV_EF_EXPLODE))
