@@ -114,6 +114,9 @@ void ff_h264_draw_horiz_band(const H264Context *h, H264SliceContext *sl,
 
     height = FFMIN(height, avctx->height - y);
 
+
+    printf("marker draw horiz band 2\n");
+
     if (field_pic && h->first_field && !(avctx->slice_flags & SLICE_FLAG_ALLOW_FIELD))
         return;
 
