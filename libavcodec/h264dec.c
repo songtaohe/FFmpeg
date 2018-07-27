@@ -604,6 +604,10 @@ static void hst_dump_bytes(uint8_t * ptr, int length) {
     char s[512];
     char * sp = s;
 
+    if (ptr==NULL){
+        return;
+    }
+
     for (int i=0; i<length; i++){
         sp = sp + sprintf(sp, "%x", ptr[i]);
 
