@@ -614,7 +614,7 @@ static void hst_dump_bytes(uint8_t * ptr, int length) {
     }
     sp = sp + sprintf(sp, "\n\0");
 
-    printf("%s",s);
+    printf("%p: %s",ptr, s);
 
 }
 
@@ -658,7 +658,7 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
 
     printf("nals needed %d\n", h->pkt.nb_nals);
 
-    printf("before\n");
+    printf("before format %d\n", h->cur_pic.f->format);
     hst_dump_bytes(h->cur_pic.f->data[0], 128);
 
 
@@ -798,7 +798,7 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
     ret = 0;
 end:
 
-    printf("after\n");
+    printf("after format %d\n", h->cur_pic.f->format);
     hst_dump_bytes(h->cur_pic.f->data[0], 128);
 
 
