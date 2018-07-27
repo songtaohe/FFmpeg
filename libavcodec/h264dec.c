@@ -660,7 +660,7 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
 
     printf("before format %d\n", h->cur_pic.f->format);
     hst_dump_bytes(h->cur_pic.f->data[0], 128);
-
+    printf("address %p\n", h->cur_pic.f->data[0]);
 
 
 
@@ -790,6 +790,10 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
             av_log(h->avctx, AV_LOG_ERROR, "decode_slice_header error\n");
         }
     }
+
+
+    printf("address %p\n", h->cur_pic.f->data[0]);
+    
 
     ret = ff_h264_execute_decode_slices(h);
     if (ret < 0 && (h->avctx->err_recognition & AV_EF_EXPLODE))
