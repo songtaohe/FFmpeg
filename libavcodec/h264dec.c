@@ -600,7 +600,7 @@ static void debug_green_metadata(const H264SEIGreenMetaData *gm, void *logctx)
     }
 }
 
-static int hst_dump_bytes(uint8_t * ptr, int length) {
+static void hst_dump_bytes(uint8_t * ptr, int length) {
     char s[512];
     char * sp = s;
 
@@ -656,7 +656,7 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
 
 
     hst_dump_bytes(h->cur_pic.f->data, 128);
-    
+
 
 
 
