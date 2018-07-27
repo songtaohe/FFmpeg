@@ -610,7 +610,7 @@ static void hst_dump_bytes(uint8_t * ptr, int length) {
     }
     sp = sp + sprintf(sp, "\n\0");
 
-    printf("%s",sp);
+    printf("%s",s);
 
 }
 
