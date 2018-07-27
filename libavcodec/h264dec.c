@@ -658,7 +658,7 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
 
     printf("nals needed %d\n", h->pkt.nb_nals);
 
-
+    printf("before\n");
     hst_dump_bytes(h->cur_pic.f->data[0], 128);
 
 
@@ -797,6 +797,12 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
 
     ret = 0;
 end:
+
+    printf("after\n");
+    hst_dump_bytes(h->cur_pic.f->data[0], 128);
+
+
+
 
 #if CONFIG_ERROR_RESILIENCE
     /*
