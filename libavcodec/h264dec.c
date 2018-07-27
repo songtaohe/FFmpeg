@@ -798,7 +798,7 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
     ret = 0;
 end:
 
-    printf("after format %d\n", h->cur_pic.f->format);
+    printf("after format %d %d\n", h->cur_pic.f->format,  AV_PIX_FMT_YUV420P);
     hst_dump_bytes(h->cur_pic.f->data[0], 128);
 
 
