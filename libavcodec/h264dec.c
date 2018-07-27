@@ -655,7 +655,7 @@ static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
     printf("nals needed %d\n", h->pkt.nb_nals);
 
 
-    hst_dump_bytes(h->cur_pic.f->data, 128);
+    hst_dump_bytes(h->cur_pic.f->data[0], 128);
 
 
 
